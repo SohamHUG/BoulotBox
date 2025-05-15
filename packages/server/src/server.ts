@@ -1,26 +1,34 @@
-import express from "express";
-// import cors from "cors"
-// import cookieParser from "cookie-parser";
+import express, { Request, Response } from "express";
+import cors from "cors"
+import cookieParser from "cookie-parser";
+import { env } from "./config/env";
+import { APIResponse } from "./utils";
 
 const app = express();
-// const { PORT, FRONTEND_URL } = env;
+const { PORT, FRONTEND_URL } = env;
 
 
-// app.use(cookieParser());
+app.use(cookieParser());
 
-// app.use(cors({
-//     origin: FRONTEND_URL,
-//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-//     credentials: true
-// }));
+app.use(cors({
+    origin: FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true
+}));
 
 
-app.use(express.json()); // le payload (le body) de la req sera accessible dans toutes mes routes depuis req.body
-app.use(express.urlencoded({ extended: true })); // lire le body lorsque le payload sera de type form-data-urlencoded (formulaire)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get('/', (req: Request, res: Response) => {
+    APIResponse(res, {test: "tout good"}, "Server Ok !")
+})
 
 
 // app.use(routes);
 
-// app.listen(PORT, () => {
-//     console.log(`Serveur lancé sur http://localhost:${PORT}`);
-// })
+// console.log(PORT)
+
+app.listen(PORT, () => {
+    console.log(`Serveur lancé sur http://localhost:${PORT}`);
+})
