@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors"
 import cookieParser from "cookie-parser";
 import { env } from "./config/env";
-import { APIResponse } from "./utils";
+import routes from "./routes/index.route"
 
 const app = express();
 const { PORT, FRONTEND_URL } = env;
@@ -20,14 +20,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req: Request, res: Response) => {
-    APIResponse(res, {test: "tout good"}, "Server Ok !")
-})
+app.use(routes);
 
-
-// app.use(routes);
-
-// console.log(PORT)
 
 app.listen(PORT, () => {
     console.log(`Serveur lancé sur http://localhost:${PORT}`);
