@@ -30,3 +30,20 @@ export const pushUser = (user: NewUser) => {
         throw new Error('Impossible de créer l\'utilisateur')
     }
 }
+
+export const findAllUsers = () => {
+    try {
+        return db.query.users.findMany({
+            columns: {
+                id: true,
+                email: true,
+                firstname: true,
+                lastname: true,
+                role: true,
+            }
+        }).execute();
+    } catch (error) {
+        logger.error(`Erreur lors de la récupération des utilisateurs`);
+        throw new Error('Impossible de récupérer les utilisateurs')
+    }
+}

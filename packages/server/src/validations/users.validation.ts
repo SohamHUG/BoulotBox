@@ -8,5 +8,5 @@ export const usersValidation = z.object({
         .min(6, { message: "Le mot de passe doit contenir au moins 6 caractères" })
         .regex(/[0-9]/, { message: "Le mot de passe doit contenir au moins un chiffre" })
         .regex(/[!@#$%^&*(),.?":{}|<>]/, { message: "Le mot de passe doit contenir au moins un symbole" }),
-    role: z.enum(["freelance", "client"], {message: "Rôle invalide"})
+    type: z.enum(["freelance", "client"], {message: "Type de compte invalide"})
 })

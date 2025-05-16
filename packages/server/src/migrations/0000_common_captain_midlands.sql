@@ -1,4 +1,5 @@
-CREATE TYPE "public"."user_role" AS ENUM('freelance', 'client');--> statement-breakpoint
+CREATE TYPE "public"."user_role" AS ENUM('user', 'admin');--> statement-breakpoint
+CREATE TYPE "public"."user_type" AS ENUM('freelance', 'client');--> statement-breakpoint
 CREATE TYPE "public"."mission_status" AS ENUM('pending', 'in_progress', 'completed');--> statement-breakpoint
 CREATE TABLE "users" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
@@ -6,7 +7,8 @@ CREATE TABLE "users" (
 	"firstname" varchar(255) NOT NULL,
 	"lastname" varchar(255) NOT NULL,
 	"password" varchar(255) NOT NULL,
-	"role" "user_role" NOT NULL,
+	"role" "user_role" DEFAULT 'user' NOT NULL,
+	"type" "user_type" NOT NULL,
 	CONSTRAINT "users_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint

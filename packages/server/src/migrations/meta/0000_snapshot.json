@@ -1,5 +1,5 @@
 {
-  "id": "b9209dfa-6d01-4dbe-b0a7-5569872a8f01",
+  "id": "4ff21648-af6e-4398-a0e8-35b9168cc2f0",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -42,6 +42,14 @@
         "role": {
           "name": "role",
           "type": "user_role",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'user'"
+        },
+        "type": {
+          "name": "type",
+          "type": "user_type",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
@@ -151,6 +159,14 @@
   "enums": {
     "public.user_role": {
       "name": "user_role",
+      "schema": "public",
+      "values": [
+        "user",
+        "admin"
+      ]
+    },
+    "public.user_type": {
+      "name": "user_type",
       "schema": "public",
       "values": [
         "freelance",
