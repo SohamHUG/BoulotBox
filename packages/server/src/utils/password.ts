@@ -13,3 +13,12 @@ export const hashPassword = async (password: string): Promise<string | void> => 
         logger.error(`Erreur hashage : ${err}`)
     }
 }
+
+export const verifyPassword = async (inputPassword: string, hashedPassword: string): Promise<boolean> => {
+    try {
+        return await bcrypt.compare(inputPassword, hashedPassword);
+    } catch (error) {
+        console.error('Erreur lors de la vérification: ', error);
+        return false;
+    }
+}

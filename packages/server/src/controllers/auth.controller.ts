@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { usersValidation } from "../validations/users.validation";
-import { APIResponse, hashPassword, logger } from "../utils";
+import { APIResponse, hashPassword, logger, verifyPassword } from "../utils";
 import { findByCredentilas, pushUser } from "../models/user.model";
 import { z } from "zod";
 import bcrypt from 'bcryptjs';
@@ -45,8 +45,8 @@ export const login = async (req: Request, res: Response) => {
         if (!user)
             return APIResponse(res, null, "Email ou mot de passe incorrect", 400);
 
-        const hash = await bcrypt.compare(password, user.password);
-        if (!hash)
+        // const hash = await bcrypt.compare(password, user.password);
+        if (await verifyPassword(password, user.password) === false)
             return APIResponse(res, null, "Email ou mot de passe incorrect", 400);
 
         const accessToken = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' })
@@ -63,4 +63,9 @@ export const login = async (req: Request, res: Response) => {
         console.error(err);
         APIResponse(res, null, "Erreur server", 500);
     }
+}
+
+export const logout = (req: Request, res: Response) => {
+    res.clearCookie("accessToken");
+    APIResponse(res, null, "Vous êtes déconnecté", 200)
 }

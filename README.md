@@ -17,9 +17,7 @@ Les clients peuvent sélectionner un freelance pour commencer la mission
 Gestion de l'état : "Ouverte" → "En cours" → "Terminée"
 
 ## Chat en temps réel
-Messagerie temps réel (Socket.IO ou WebSockets)
-
-Filtrage des messages par mission
+Messagerie temps réel 
 
 ## Tableau de bord
 Pour les freelances : missions en cours / terminées / postulées
